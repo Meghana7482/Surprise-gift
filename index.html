@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Surprise</title>
+<style>
+  body{
+    margin:0;
+    font-family: 'Arial', sans-serif;
+    background:#ffe6f0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+  }
+  .card{
+    text-align:center;
+    width:90%;
+    max-width:400px;
+  }
+  img{
+    width:100%;
+    border-radius:16px;
+    margin-top:15px;
+  }
+  button{
+    padding:12px 20px;
+    margin:10px;
+    font-size:16px;
+    border:none;
+    border-radius:25px;
+    background:#ff5fa2;
+    color:white;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO FILES -->
+<audio id="bgm" src="bgm.mp3" loop></audio>
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="cameraSound" src="camera.mp3"></audio>
+<audio id="giftSound" src="gift.mp3"></audio>
+
+<div class="card" id="app"></div>
+
+<script>
+const app = document.getElementById("app");
+
+function playMusic(){
+  const bgm = document.getElementById("bgm");
+  if(bgm.paused){
+    bgm.play();
+  }
+}
+function clickBtn(){ document.getElementById("clickSound").play(); }
+function cameraClick(){ document.getElementById("cameraSound").play(); }
+function giftOpen(){ document.getElementById("giftSound").play(); }
+
+function screen1(){
+  app.innerHTML = `
+    <h2>Hey! I made something for you 💕<br>Will you see it?</h2>
+    <img src="pic1.jpg">
+    <br>
+    <button onclick="clickBtn(); screenNo()">No</button>
+    <button onclick="playMusic(); clickBtn(); screen2()">Yes</button>
+  `;
+}
+
+function screenNo(){
+  app.innerHTML = `
+    <h2>How dare you!! 😤</h2>
+    <img src="pic2.jpg">
+    <br>
+    <button onclick="clickBtn(); screen1()">🔙 Back</button>
+  `;
+}
+
+function screen2(){
+  app.innerHTML = `
+    <h2>Hehe! Click below for the surprise 😏</h2>
+    <img src="pic3.jpg">
+    <br>
+    <button onclick="clickBtn(); screen3()">Next ➡️</button>
+  `;
+}
+
+function screen3(){
+  app.innerHTML = `
+    <h2>Happy New Year my kuchupuchu 🎉💖</h2>
+    <p>Click on the gift box 🎁</p>
+    <img src="pic4.jpg" onclick="giftOpen(); screen4()">
+  `;
+}
+
+function screen4(){
+  app.innerHTML = `
+    <h2>SMILEEEE 😄📸</h2>
+    <p>Click on the camera</p>
+    <img src="pic5.jpg" onclick="cameraClick(); screen5()">
+  `;
+}
+
+function screen5(){
+  app.innerHTML = `
+    <h2>Forever us 💞</h2>
+    <img src="pic6.jpg">
+  `;
+}
+
+screen1();
+</script>
+
+</body>
+</html>
